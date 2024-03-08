@@ -43,7 +43,7 @@ const signup = async (req, res) => {
         if(newTeacher){
             await newTeacher.save();
             generateJWTtoken(newTeacher._id, res);
-            await res.status(201).json({
+            await res.status(200).json({
                 _id: newTeacher.id,
                 fullName: newTeacher.fullName,
                 userName: newTeacher.userName,
@@ -71,14 +71,14 @@ const login = async (req, res) => {
         let {email, password} = req.body;
         const existingTeacher = await Teacher.findOne({ email });
         if(!existingTeacher) {
-            return res.status(400).json({error: "User already registered"});
+            return res.status(400).json({error: "User does not exist"});
         }
         const matchingPassword = await bcrypt.compare(password, existingTeacher.password);
         if(matchingPassword){
             // console.log("Login Successfull");
             generateJWTtoken(existingTeacher._id, res);
             await res.status(200).json({
-                existingTeacher,
+                user:existingTeacher,
                 message: "Login Successfull"}
             );
         }

@@ -5,10 +5,13 @@ const searchRoutes = require("./routes/search.routes.js");
 const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const cors=require('cors');
+
 const app = express();
 const port = 2000;
 
 dotenv.config();
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 

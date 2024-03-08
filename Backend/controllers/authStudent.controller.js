@@ -72,7 +72,7 @@ const login = async (req, res) => {
             // console.log("Login Successfull");
             generateJWTtoken(existingStudent._id, res);
             await res.status(200).json({
-                existingStudent,
+                user:existingStudent,
                 message: "Login Successfull"}
             );
         }
