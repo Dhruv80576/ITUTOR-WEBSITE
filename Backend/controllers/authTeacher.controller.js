@@ -4,7 +4,7 @@ const { generateJWTtoken } = require("../utils/generateToken");
 
 const signup = async (req, res) => {
     try {
-        let {fullName, userName, email, password, confirmPassword, profilePic, gender, language, proficiency, permissionType} = req.body;
+        let {fullName, userName, email, password, confirmPassword, profilePic, gender, language, cost, permissionType, experience} = req.body;
         if(password !== confirmPassword) {
             res.status(400).json({error: "Password is not matching with confirmPassword"});
         }
@@ -36,8 +36,9 @@ const signup = async (req, res) => {
             profilePic,
             gender,
             language,
-            proficiency,
-            permissionType
+            permissionType,
+            cost,
+            experience
         });
         if(newTeacher){
             await newTeacher.save();
@@ -51,8 +52,9 @@ const signup = async (req, res) => {
                 profilePic: newTeacher.profilePic,
                 gender: newTeacher.gender,
                 language: newTeacher.language,
-                proficiency: newTeacher.proficiency,
-                permissionType: newTeacher.permissionType
+                permissionType: newTeacher.permissionType,
+                cost: newTeacher.cost,
+                experience: newTeacher.experience
             });
         }
         else {
