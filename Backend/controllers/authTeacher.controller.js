@@ -9,11 +9,11 @@ const signup = async (req, res) => {
             res.status(400).json({error: "Password is not matching with confirmPassword"});
         }
         const existingEmail = await Teacher.findOne({ email });
-        const existingUser = await Teacher.findOne({ userName });
+        const existingTeacher = await Teacher.findOne({ userName });
         if(existingEmail) {
             return res.status(400).json({error: "Email already registered"});
         }
-        if(existingUser) {
+        if(existingTeacher) {
             return res.status(400).json({error: "User name is already used"});
         }
         const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,7 @@ const signup = async (req, res) => {
         else{
             profilePic= girlProfilePic;
         }
-        const newUser = new Teacher({
+        const newTeacher = new Teacher({
             fullName, 
             userName, 
             email, 
@@ -38,8 +38,8 @@ const signup = async (req, res) => {
             language,
             proficiency
         });
-        if(newUser){
-            await newUser.save();
+        if(newTeacher){
+            await newTeacher.save();
             generateJWTtoken(newUser._id, res);
             await res.status(201).json({
                 _id: newUser.id,
@@ -62,4 +62,41 @@ const signup = async (req, res) => {
     }
 }
 
-module.exports = {signup}
+const login = async (req, res) => {
+    try {
+        let {email, password} = req.body;
+        const existingTeacher = await Teacher.findOne({ email });
+        if(!existingTeacher) {
+            return res.status(400).json({error: "User already registered"});
+        }
+        const matchingPassword = await bcrypt.compare(password, existingTeacher.password);
+        if(matchingPassword){
+            // console.log("Login Successfull");
+            generateJWTtoken(existingTeacher._id, res);
+            await res.status(200).json({
+                existingTeacher,
+                message: "Login Successfull"}
+            );
+        }
+        else{
+            await res.status(404).json({
+                error: "Login Unsuccessfull"
+            })
+        }
+    } catch (error) {
+        console.log("error in login controller ", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+const logout = (req, res) => {
+    try {
+        res.cookie("jwt", "", {maxAge: 0});
+        res.status(200).json({message: "Logout successfully"});
+    } catch (error) {
+        console.log("error in logout controller ", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+module.exports = {signup, login, logout}

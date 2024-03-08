@@ -1,5 +1,5 @@
 const connectToDB = require("./db/connect.js");
-const authRoutes = require("./routes/auth.routes.js");
+const authTeacherRoutes = require("./routes/authTeacher.routes.js");
 const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 })
 
-app.use('/api/auth', authRoutes); 
+app.use('/api/auth/teacher/', authTeacherRoutes); 
 
 app.listen(port, ()=>{
     connectToDB();
