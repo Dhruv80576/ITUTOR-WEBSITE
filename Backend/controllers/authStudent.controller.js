@@ -1,19 +1,19 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
-const { Teacher } = require("../models/teacher.model");
+const { Student } = require("../models/student.model");
 const { generateJWTtoken } = require("../utils/generateToken");
 
 const signup = async (req, res) => {
     try {
-        let {fullName, userName, email, password, confirmPassword, profilePic, gender, language, proficiency, permissionType} = req.body;
+        let {fullName, userName, email, password, confirmPassword, profilePic, gender, permissionType} = req.body;
         if(password !== confirmPassword) {
             res.status(400).json({error: "Password is not matching with confirmPassword"});
         }
-        const existingEmail = await Teacher.findOne({ email });
-        const existingTeacher = await Teacher.findOne({ userName });
+        const existingEmail = await Student.findOne({ email });
+        const existingStudent = await Student.findOne({ userName });
         if(existingEmail) {
             return res.status(400).json({error: "Email already registered"});
         }
-        if(existingTeacher) {
+        if(existingStudent) {
             return res.status(400).json({error: "User name is already used"});
         }
         const salt = await bcrypt.genSalt(10);
@@ -28,31 +28,27 @@ const signup = async (req, res) => {
         else{
             profilePic= girlProfilePic;
         }
-        const newTeacher = new Teacher({
+        const newStudent = new Student({
             fullName, 
             userName, 
             email, 
             password: hashedPassword, 
             profilePic,
             gender,
-            language,
-            proficiency,
             permissionType
         });
-        if(newTeacher){
-            await newTeacher.save();
-            generateJWTtoken(newTeacher._id, res);
+        if(newStudent){
+            await newStudent.save();
+            generateJWTtoken(newStudent._id, res);
             await res.status(201).json({
-                _id: newTeacher.id,
-                fullName: newTeacher.fullName,
-                userName: newTeacher.userName,
-                email: newTeacher.email,
-                password: newTeacher.password,
-                profilePic: newTeacher.profilePic,
-                gender: newTeacher.gender,
-                language: newTeacher.language,
-                proficiency: newTeacher.proficiency,
-                permissionType: newTeacher.permissionType
+                _id: newStudent.id,
+                fullName: newStudent.fullName,
+                userName: newStudent.userName,
+                email: newStudent.email,
+                password: newStudent.password,
+                profilePic: newStudent.profilePic,
+                gender: newStudent.gender,
+                permissionType: newStudent.permissionType
             });
         }
         else {
@@ -67,16 +63,16 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         let {email, password} = req.body;
-        const existingTeacher = await Teacher.findOne({ email });
-        if(!existingTeacher) {
+        const existingStudent = await Student.findOne({ email });
+        if(!existingStudent) {
             return res.status(400).json({error: "User already registered"});
         }
-        const matchingPassword = await bcrypt.compare(password, existingTeacher.password);
+        const matchingPassword = await bcrypt.compare(password, existingStudent.password);
         if(matchingPassword){
             // console.log("Login Successfull");
-            generateJWTtoken(existingTeacher._id, res);
+            generateJWTtoken(existingStudent._id, res);
             await res.status(200).json({
-                existingTeacher,
+                existingStudent,
                 message: "Login Successfull"}
             );
         }
