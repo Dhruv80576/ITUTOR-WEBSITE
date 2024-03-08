@@ -8,8 +8,9 @@ const teacherSchema = new mongoose.Schema({
     profilePic: {type: String},
     gender: {type: String, required: true, enum: ["male", "female"]},
     language: {type: String, required: true},
-    proficiency: {type: String,required: true, enum: ["Proficient", "Expert", "Beginner"]},
     permissionType: {type: String, required: true, enum: ["Student", "Teacher"]},
+    cost: {type: String},
+    experience: {type: String},
     date: {type: Date, createdAt: Date.now()}
 }, {timestamps: true})
 
