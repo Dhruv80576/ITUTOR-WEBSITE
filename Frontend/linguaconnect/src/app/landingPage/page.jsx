@@ -32,9 +32,10 @@ const LandingPage = () => {
                         console.log(response)
                         if (response.status == 200) {
                             const Permission=response.data.user.permissionType.toLowerCase();
-                            localStorage.setItem('userId', response.data.user._id);
-                            localStorage.setItem('Permission', response.data.user.permissionType);
-                            router.replace(`${Permission}`)
+                            const userid=response.data.user._id;
+                            localStorage.setItem('userId', userid);
+                            localStorage.setItem('Permission', Permission);
+                            router.replace(`${Permission}/${userid}`)
                             toast.success("Login Successfull")
                             console.log("Success")
                         }

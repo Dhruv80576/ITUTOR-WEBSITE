@@ -1,9 +1,9 @@
 const Teacher_Dashboard = () => {
-    return ( 
+    return (
         <div>
             teacher
         </div>
-     );
+    );
 }
- 
+
 export default Teacher_Dashboard;
