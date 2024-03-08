@@ -10,16 +10,16 @@ const axiosInstance = axios.create({
 
 export const register_teacher = async (teacher) => {
     try {
-        const response = await axiosInstance.post('/auth/teacher/signup',teacher);
+        const response = await axiosInstance.post('/api/auth/teacher/signup',teacher);
         return response;
     } catch (error) {
         // console.error('Error:', error.response ? error.response.data : error.message);
         throw error;
     }
 };
-export const register_student = async (teacher) => {
+export const register_student = async (student) => {
     try {
-        const response = await axiosInstance.post('/auth/teacher/signup',teacher);
+        const response = await axiosInstance.post('/api/auth/student/signup',student);
         return response;
     } catch (error) {
         // console.error('Error:', error.response ? error.response.data : error.message);
@@ -28,7 +28,7 @@ export const register_student = async (teacher) => {
 };
 export const signin_teacher = async (req) => {
     try {
-        const response = await axiosInstance.post('/auth/teacher/login',req);
+        const response = await axiosInstance.post('/api/auth/teacher/login',req);
         return response;
     } catch (error) {
         // console.error('Error:', error.response ? error.response.data : error.message);
