@@ -17,12 +17,10 @@ const Register_User = () => {
         const { name, value } = e.target;
         setTeacher({ ...teacher, [name]: value, ['permissionType']: type });
     }
-
     const changeStudent = (e) => {
         const { name, value } = e.target;
         setStudent({ ...student, [name]: value, ['permissionType']: type });
     }
-
     return (
         <div className="flex flex-row w-screen h-screen">
             <div className="flex flex-col items-center justify-start pt-[10%] w-[40%] bg-white h-screen overflow-y-scroll">
@@ -118,12 +116,9 @@ const Register_User = () => {
                             </div>
                         }
                     </form>
-
                 </div>
-
             </div>
         </div>
-
     );
 }
 

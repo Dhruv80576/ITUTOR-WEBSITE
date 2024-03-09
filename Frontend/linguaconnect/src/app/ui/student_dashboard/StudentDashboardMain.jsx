@@ -34,9 +34,31 @@ const StudentDashboardMain = (props) => {
     getdata(searchName, pricing, experience, language, setUsers);
   };
 
-  const handleMentorConnection = (event) =>{
+  const handleMentorConnection = (event) => {
     addMentors();
-  }
+  };
+
+  const handleMessageSent = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/send-notification", {
+        senderId,
+        receiverId,
+        title,
+        body,
+      });
+
+      if (response.data.success) {
+        alert("Notification sent successfully");
+      } else {
+        alert("Error sending notification");
+      }
+    } catch (error) {
+      console.error("Error sending notification", error);
+      alert("Error sending notification");
+    }
+  };
 
   const getdata = async (
     searchName,
@@ -53,14 +75,12 @@ const StudentDashboardMain = (props) => {
     );
     if (response.status === 200) {
       console.log("success");
-      console.log(response.data);
+      console.log("Printing response data",response.data);
       setUsers(response.data.data);
     }
   };
 
-  const addMentors = async () => {
-    
-  }
+  const addMentors = async () => {};
   return (
     <main
       className="my-1 pt-2 pb-2 px-10 flex-1 bg-blue-400 dark:bg-black rounded-l-lg
@@ -146,19 +166,22 @@ const StudentDashboardMain = (props) => {
             </div>
           </div>
           <div className="flex flex-col items-center mt-12">
-            <img
+            {/* <img
               src="https://cdni.iconscout.com/illustration/premium/thumb/empty-state-2130362-1800926.png"
               height={400}
               width={400}
               alt=" empty schedule"
-            />
-            <span className="font-bold mt-8">Start Learning!</span>
-            <span className="text-white">Make your first appointment</span>
-            <Modal
-              backdrop="blur"
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-            >
+            /> */}
+            {/* <span className="font-bold mt-8">Start Learning!</span>
+            <span className="text-white">Make your first appointment</span> */}
+
+            <form >
+              <label htmlFor="message">Full Message:</label>
+              <Input type="text" id="message" />
+              <Button>Submit</Button>
+            </form>
+
+            <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 {(onClose) => (
                   <>
@@ -166,8 +189,8 @@ const StudentDashboardMain = (props) => {
                       <p className="text-black">Details of the teacher</p>
                     </ModalHeader>
                     <ModalBody>
-                      <TeacherDashboardModalSidebar {...teacher} />                    
-                      </ModalBody>
+                      <TeacherDashboardModalSidebar {...teacher} />
+                    </ModalBody>
                     <ModalFooter>
                       <Button color="danger" variant="light" onPress={onClose}>
                         Close
@@ -180,7 +203,7 @@ const StudentDashboardMain = (props) => {
                           onClose();
                         }}
                       >
-                        Save
+                        connect
                       </Button>
                     </ModalFooter>
                   </>

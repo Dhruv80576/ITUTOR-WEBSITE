@@ -1,4 +1,4 @@
-import Image from "next/image";
+"use client";
 import LandingPage from "./landingPage/page";
 export default function Home() {
   return (
@@ -7,3 +7,4 @@ export default function Home() {
     </div>
   );
 }
+ 
