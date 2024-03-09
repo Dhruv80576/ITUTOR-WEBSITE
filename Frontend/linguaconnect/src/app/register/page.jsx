@@ -109,6 +109,7 @@ const Register_User = () => {
                                     console.log(student)
                                     const response = await register_student(student)
                                     if (response.status == 200) {
+                                        console.log('a');
                                         router.replace('/');
                                         toast.success("Student registeres successfully");
                                     }

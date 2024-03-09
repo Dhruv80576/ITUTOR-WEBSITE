@@ -1,9 +1,10 @@
+"use client"
 import { createContext, useState, useRef, useEffect } from 'react';
 import  io  from 'socket.io-client';
 import Peer from 'simple-peer';
 
 const SocketContext = createContext();
-const socket = io('http://localhost:2000',{});
+const socket = io('http://localhost:2000',{autoConnect: false});
 const ContextProvider = ({ children }) => {
     const [callAccepted, setCallAccepted] = useState(false);
     const [callEnded, setCallEnded] = useState(false);
@@ -14,7 +15,6 @@ const ContextProvider = ({ children }) => {
     const myVideo = useRef();
     const userVideo = useRef();
     const connectionRef = useRef();
-    
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         .then((currentStream) => {
@@ -26,7 +26,7 @@ const ContextProvider = ({ children }) => {
             console.log(from,name)
             setCall({ isReceivingCall: true, from, name: callerName, signal });
         });
-    }, []);
+    }, [socket]);
     
     const answerCall = () => {
         setCallAccepted(true);

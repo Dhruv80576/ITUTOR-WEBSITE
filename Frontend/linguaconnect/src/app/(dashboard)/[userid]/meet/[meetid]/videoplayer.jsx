@@ -1,6 +1,6 @@
-import { SocketContext } from "../providers/MeetContext"
 import { useContext } from "react"
 import { Grid, Box, Heading } from "@chakra-ui/react"
+import { SocketContext } from "@/app/providers/MeetContext"
 
 
 const VideoPlayer = () => {

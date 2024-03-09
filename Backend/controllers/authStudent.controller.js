@@ -40,7 +40,7 @@ const signup = async (req, res) => {
         if(newStudent){
             await newStudent.save();
             generateJWTtoken(newStudent._id, res);
-            await res.status(201).json({
+            await res.status(200).json({
                 _id: newStudent.id,
                 fullName: newStudent.fullName,
                 userName: newStudent.userName,

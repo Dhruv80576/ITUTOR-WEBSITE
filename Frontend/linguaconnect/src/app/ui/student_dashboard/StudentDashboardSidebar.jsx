@@ -7,10 +7,14 @@ import {
   Button,
   useDisclosure
 } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 export const StudentDashboardSidebar = (props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {mentorsConnected} = props.student;
-  console.log(mentorsConnected);
+  const [userid,setuserid]=useState(null);
+  useEffect(() => {
+    setuserid(typeof window !== "undefined" ? localStorage.getItem("userId") : null)
+  },[])
   return (
     <div>
       <nav className="w-24 flex flex-col items-center bg-white dark:bg-gray-800 py-4">
@@ -137,7 +141,7 @@ export const StudentDashboardSidebar = (props) => {
           className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
     rounded-lg"
         >
-          <a href="meetup/" className=" flex flex-col items-center">
+          <a href={`/${userid}/meet/${1}`} className=" flex flex-col items-center">
             <svg className="fill-current h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M19 19H5V8h14m0-5h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2

@@ -1,4 +1,5 @@
 const connectToDB = require("./db/connect.js");
+const {Server}=require("socket.io");
 const authTeacherRoutes = require("./routes/authTeacher.routes.js");
 const authStudentRoutes = require("./routes/authStudent.routes.js");
 const searchRoutes = require("./routes/search.routes.js");
@@ -9,8 +10,9 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const app = express();
+
 const server = require("http").createServer(app);
-const io = require("socket.io")(server, {
+const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"]
@@ -28,19 +30,28 @@ app.use('/api/auth/teacher/', authTeacherRoutes);
 app.use('/api/auth/student/', authStudentRoutes);
 app.use('/api/search/', searchRoutes);
 app.use('/api/teacher/', teacherRoutes);
+app.use('/api/student/', studentRoutes);
 io.on("connection", (socket) => {
-    console.log("connection created:",socket.id);
     socket.emit("me", socket.id);
+  
     socket.on("disconnect", () => {
-        socket.broadcast.emit("callEnded")
+      socket.broadcast.emit("callEnded");
     });
-    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-        io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+  
+    socket.on("callUser", (data) => {
+      console.log(`Incoming call from ${data.from}`);
+      io.to(data.userToCall).emit("callUser", {
+        signal: data.signalData,
+        from: data.from,
+        name: data.name,
+      });
     });
+  
     socket.on("answerCall", (data) => {
-        io.to(data.to).emit("callAccepted", data.signal)
+      console.log(`Answering call from ${data.from}`);
+      io.to(data.to).emit("callAccepted", data.signal);
     });
-});
+  });
 server.listen(port, () => {
     connectToDB();
     console.log(`Listening to port ${port}`);

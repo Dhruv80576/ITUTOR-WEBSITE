@@ -3,7 +3,7 @@ import { useState, useContext } from "react"
 import { Button, Input, FormLabel, Heading, Grid, Box, Container, FormControl } from "@chakra-ui/react"
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BiClipboard, BiPhoneCall, BiPhoneOff } from "react-icons/bi";
-import { SocketContext } from "../providers/MeetContext";
+import { SocketContext } from "@/app/providers/MeetContext"
     
 const Options = () => {
     const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
@@ -18,6 +18,7 @@ return (
                         <Heading as="h6"> Account Info </Heading>
                         <FormLabel>Username</FormLabel>
                         <Input type='text' value={name} onChange={(e) => setName(e.target.value)} width="100%" />
+                        <h1>{me}</h1>
                         <CopyToClipboard text={me} mt="20">
                             <Button leftIcon={<BiClipboard />} colorScheme='teal' variant='solid'>
                                 Copy ID

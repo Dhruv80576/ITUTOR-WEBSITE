@@ -26,3 +26,13 @@ export const search_profile = async (name, cost, language, experience) => {
         throw error;
     }
 };
+
+export const schedule_event = async (req,userId) => {
+    try {
+        const response = await axiosInstance.put(`/api/teacher/schedule/${userId}`,req);
+        return response;
+    } catch (error) {
+        // console.error('Error:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};

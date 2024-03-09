@@ -1,20 +1,30 @@
+import { schedule_event } from "@/app/api/teachers_routes";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 const TeacherDashboardMain = (props) => {
-	const name=props.teacher.fullName;
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	const name = `${props.teacher.fullName}`;
+	const { isOpen, onOpen,onClose, onOpenChange } = useDisclosure();
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
 	const [duration, setDuration] = useState("");
+	const add_schedule= async ()=>{
+		const userid=localStorage.getItem('userId');
+		const response=await schedule_event({"date":`${date}`, "startingTime":`${time}`, "duration":`${duration}`},userid)
+		onClose();
+		if(response.status==200){
+			toast.success("Schedule added successfully")	
+		}
+	}
 	return (
 		<main
 			className="my-1 pt-2 pb-2 px-10 flex-1 bg-blue-400 dark:bg-black rounded-l-lg
 		transition duration-500 ease-in-out overflow-y-hidden">
 			<div className="flex flex-col capitalize text-3xl">
 				<span className="font-semibold">hello,  {name}!</span>
-
+				
 			</div>
 			<div className="flex">
 				<div
@@ -232,9 +242,9 @@ const TeacherDashboardMain = (props) => {
 											<p>
 												Select a slot to schedule a lesson.
 											</p>
-											<Input type="date" onChange={(e) => { setDate(e.target.value) }} label="Select Date" size="lg"/>
-											<Input type="time" onChange={(e) => { setTime(e.target.value) }} label="Select Time" size="lg"/>
-											<Input type="number" onChange={(e) => { setDuration(e.target.value) }} label="Select Duartion" size="lg"/>
+											<Input type="date" onChange={(e) => { setDate(e.target.value) }} label="Select Date" size="lg" />
+											<Input type="time" onChange={(e) => { setTime(e.target.value) }} label="Select Time" size="lg" />
+											<Input type="number" onChange={(e) => { setDuration(e.target.value) }} label="Select Duartion" size="lg" />
 
 										</ModalBody>
 										<ModalFooter>
@@ -243,8 +253,7 @@ const TeacherDashboardMain = (props) => {
 											</Button>
 											<Button color="primary" onPress={
 												() => {
-													console.log(date, time, duration);
-													onClose();
+													add_schedule();
 												}
 											}>
 												Save
