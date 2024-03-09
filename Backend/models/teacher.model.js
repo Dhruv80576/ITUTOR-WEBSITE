@@ -11,6 +11,17 @@ const teacherSchema = new mongoose.Schema({
     permissionType: {type: String, required: true, enum: ["Student", "Teacher"]},
     cost: {type: String},
     experience: {type: String},
+    classes: {type: Number, default: 0},
+    studentsTaught: {type: Number, default: 0},
+    ratings: [{
+        type: Number,
+        required: true,
+    }],
+    schedule: [{
+        date: {type: String, required: true},
+        startingTime: { type: String, required: true },
+        duration: { type: String, required: true } // Duration in minutes
+    }],
     date: {type: Date, createdAt: Date.now()}
 }, {timestamps: true})
 
