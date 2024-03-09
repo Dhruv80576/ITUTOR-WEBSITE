@@ -219,41 +219,10 @@ const StudentDashboardMain = () => {
 						</span>
 
 						<button className="mt-8 bg-purple-800 rounded-lg py-2 px-4" onClick={() => {
-							onOpen();
 						}}>
 							Make a schedule
 						</button>
-						<Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
-							<ModalContent >
-								{(onClose) => (
-									<>
-										<ModalHeader className="flex flex-col gap-1" ><p className="text-black">Schedule time slots</p></ModalHeader>
-										<ModalBody>
-											<p>
-												Select a slot to schedule a lesson.
-											</p>
-											<Input type="date" onChange={(e) => { setDate(e.target.value) }} label="Select Date" size="lg"/>
-											<Input type="time" onChange={(e) => { setTime(e.target.value) }} label="Select Time" size="lg"/>
-											<Input type="number" onChange={(e) => { setDuration(e.target.value) }} label="Select Duartion" size="lg"/>
-
-										</ModalBody>
-										<ModalFooter>
-											<Button color="danger" variant="light" onPress={onClose}>
-												Close
-											</Button>
-											<Button color="primary" onPress={
-												() => {
-													console.log(date, time, duration);
-													onClose();
-												}
-											}>
-												Save
-											</Button>
-										</ModalFooter>
-									</>
-								)}
-							</ModalContent>
-						</Modal>
+						
 					</div>
 				</div>
 

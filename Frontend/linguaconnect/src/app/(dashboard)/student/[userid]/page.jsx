@@ -7,7 +7,7 @@ import NavBar from "@/app/ui/student_dashboard/navbar";
 const Student_Dashboard = () => {
     return ( 
         <div className="h-screen w-full flex overflow-hidden select-none bg-gray-50">
-            <StudentDashboardSidebar/>
+            <StudentDashboardSidebar />
             <StudentDashboardMain/>
             <StudentDashboardProfile/>
         </div>
