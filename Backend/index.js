@@ -4,8 +4,6 @@ const authStudentRoutes = require("./routes/authStudent.routes.js");
 const searchRoutes = require("./routes/search.routes.js");
 const teacherRoutes = require("./routes/teacher.routes.js");
 const studentRoutes = require("./routes/student.routes.js");
-const notificationRoutes = require("./routes/notification.routes.js");
-
 const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -28,7 +26,6 @@ app.use('/api/auth/student/', authStudentRoutes);
 app.use('/api/search/', searchRoutes);
 app.use('/api/teacher/', teacherRoutes);
 app.use('/api/student/', studentRoutes);
-app.use('/api/notifications/', notificationRoutes);
 
 app.listen(port, ()=>{
     connectToDB();
