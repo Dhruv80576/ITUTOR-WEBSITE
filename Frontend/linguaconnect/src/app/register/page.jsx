@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button, Input } from "@nextui-org/react";
 import { useState } from "react";
 import { Montserrat } from "next/font/google";
