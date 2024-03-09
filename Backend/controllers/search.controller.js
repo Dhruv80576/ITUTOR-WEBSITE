@@ -22,10 +22,13 @@ const searchTeacher = async (req, res) => {
         if (language) {
             conditions.push({ language: new RegExp(language, 'i') });
         }
+        let teachers;
         if (conditions.length === 0) {
-            return res.status(400).json({ success: false, error: 'No search parameters provided' });
+            teachers = await Teacher.find();
         }
-        let teachers = await Teacher.find({ $or: conditions });
+        else{
+            teachers = await Teacher.find({ $or: conditions });
+        }
         
         if (teachers.length === 0) {
             return res.status(404).json({ success: false, error: 'No teachers found with the given name' });
