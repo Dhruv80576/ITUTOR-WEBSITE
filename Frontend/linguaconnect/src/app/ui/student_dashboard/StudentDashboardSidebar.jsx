@@ -60,28 +60,7 @@ export const StudentDashboardSidebar = () => {
                 011.5-1.5 1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5z"
               ></path>
             </svg>
-            <span className="text-xs mt-2">earnings</span>
-          </a>
-        </li>
-
-        <li
-          className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
-    rounded-lg"
-        >
-          <a href="users-dashboard/" className=" flex flex-col items-center">
-            <svg className="fill-current h-5 w-5" viewBox="0 0 512 512">
-              <path
-                d="M505 442.7L405.3
-                343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7
-                44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208
-                208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7
-                17l99.7 99.7c9.4 9.4 24.6 9.4 33.9
-                0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7
-                0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128
-                57.2 128 128 0 70.7-57.2 128-128 128z"
-              ></path>
-            </svg>
-            <span className="text-xs mt-2">jobs</span>
+            <span className="text-xs mt-2">Learnings</span>
           </a>
         </li>
 
@@ -110,7 +89,7 @@ export const StudentDashboardSidebar = () => {
                 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"
               ></path>
             </svg>
-            <span className="text-xs mt-2">lesson</span>
+            <span className="text-xs mt-2 text-center">Upcoming Sessions</span>
           </a>
         </li>
       </ul>

@@ -1,10 +1,10 @@
 import React from "react";
 
-const TeacherDashboardProfile = (props) => {
+const TeacherDashboardModalSidebar = (props) => {
   const {fullName, userName, profilePic, email, classes, ratings, schedule} = props;
   return (
     <aside
-      className="w-1/4 my-1 mr-1 px-6 py-4 flex flex-col bg-gray-200 dark:bg-black
+      className="w-full my-1 mr-1 px-6 py-4 flex flex-col bg-gray-200 dark:bg-black
 		dark:text-gray-400 rounded-r-lg overflow-y-auto"
     >
       <div className="flex items-center justify-between text-black">
@@ -84,4 +84,4 @@ const TeacherDashboardProfile = (props) => {
   );
 };
 
-export default TeacherDashboardProfile;
+export default TeacherDashboardModalSidebar;

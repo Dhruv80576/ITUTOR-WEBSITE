@@ -8,6 +8,16 @@ const studentSchema = new mongoose.Schema({
     profilePic: {type: String},
     gender: {type: String, required: true, enum: ["male", "female"]},
     permissionType: {type: String, required: true, enum: ["Student", "Teacher"]},
+    classesAttended: [{
+        mentor: {type: mongoose.Schema.Types.ObjectId, required:true },
+        date: {type: Date, required: true}
+    }],
+    examsAttended: [{
+        mentor: {type: mongoose.Schema.Types.ObjectId, required:true },
+        score: {type: Number, required: true},
+        maxMarks: {type: Number, required: true},
+        date: {type: Date, required: true}
+    }],
     date: {type: Date, createdAt: Date.now()}
 }, {timestamps: true})
 

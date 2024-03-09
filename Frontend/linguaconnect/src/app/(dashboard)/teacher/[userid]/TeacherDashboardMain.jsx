@@ -13,8 +13,7 @@ const TeacherDashboardMain = (props) => {
 			className="my-1 pt-2 pb-2 px-10 flex-1 bg-blue-400 dark:bg-black rounded-l-lg
 		transition duration-500 ease-in-out overflow-y-hidden">
 			<div className="flex flex-col capitalize text-3xl">
-				<span className="font-semibold">hello,</span>
-				<span>{name}</span>
+				<span className="font-semibold">hello,  {name}!</span>
 
 			</div>
 			<div className="flex">
