@@ -2,8 +2,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useState } from "react";
 
 
-const TeacherDashboardMain = (props) => {
-	const name=props.teacher.fullName;
+const StudentDashboardMain = () => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
@@ -14,7 +13,7 @@ const TeacherDashboardMain = (props) => {
 		transition duration-500 ease-in-out overflow-y-hidden">
 			<div className="flex flex-col capitalize text-3xl">
 				<span className="font-semibold">hello,</span>
-				<span>{name}</span>
+				<span>tempest!</span>
 
 			</div>
 			<div className="flex">
@@ -264,4 +263,4 @@ const TeacherDashboardMain = (props) => {
 	)
 }
 
-export default TeacherDashboardMain
+export default StudentDashboardMain;

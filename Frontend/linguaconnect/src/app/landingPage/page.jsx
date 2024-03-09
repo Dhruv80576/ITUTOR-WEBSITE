@@ -26,7 +26,7 @@ const LandingPage = () => {
                     <div className="h-5"></div>
                     <Input type="password" label="Password" onChange={(e) => { setPassword(e.target.value) }} />
                     <div className="h-5"></div>
-
+                    
                     <Button className="" onClick={async () => {
                         const response = await signin_teacher({ "email": username, "password": password })
                         console.log(response)
