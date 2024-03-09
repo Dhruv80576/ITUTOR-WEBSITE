@@ -16,3 +16,13 @@ export const teacher_profile = async (userid) => {
         throw error;
     }
 };
+
+export const search_profile = async (name, cost, language, experience) => {
+    try {
+        const response = await axiosInstance.get(`/api/search/?name=${name}&cost=${cost}&language=${language}&experience=${experience}`);
+        return response;
+    } catch (error) {
+        // console.error('Error:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};

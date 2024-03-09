@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const { Teacher } = require("../models/teacher.model");
+const { Student } = require("../models/student.model");
 const { generateJWTtoken } = require("../utils/generateToken");
 
 const signup = async (req, res) => {
@@ -70,15 +71,20 @@ const login = async (req, res) => {
     try {
         let {email, password} = req.body;
         const existingTeacher = await Teacher.findOne({ email });
-        if(!existingTeacher) {
-            return res.status(400).json({error: "User does not exist"});
+        const existingStudent = await Student.findOne({ email });
+
+        if (!existingTeacher && !existingStudent) {
+            return res.status(400).json({ error: "User does not exist" });
         }
-        const matchingPassword = await bcrypt.compare(password, existingTeacher.password);
+
+        let user = existingTeacher || existingStudent;
+
+        const matchingPassword = await bcrypt.compare(password, user.password);
         if(matchingPassword){
             // console.log("Login Successfull");
-            generateJWTtoken(existingTeacher._id, res);
+            generateJWTtoken(user._id, res);
             await res.status(200).json({
-                user:existingTeacher,
+                user:user,
                 message: "Login Successfull"}
             );
         }

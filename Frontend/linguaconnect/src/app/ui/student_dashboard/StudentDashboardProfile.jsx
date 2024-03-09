@@ -1,6 +1,7 @@
 import React from "react";
 
-const StudentDashboardProfile = () => {
+const StudentDashboardProfile = (props) => {
+  const {fullName, userName, profilePic, email, classesAttended, examsAttended} = props.student;
   return (
     <aside
       className="w-1/4 my-1 mr-1 px-6 py-4 flex flex-col bg-gray-200 dark:bg-black
@@ -36,7 +37,7 @@ const StudentDashboardProfile = () => {
         <div className="flex items-center mx-auto">
           <img
             className="h-20 w-20 rounded-full object-cover"
-            src="https://i.pinimg.com/originals/68/e1/e1/68e1e137959d363f172dc3cc50904669.jpg"
+            src={profilePic}
             alt="tempest profile"
           />
 
@@ -53,11 +54,10 @@ const StudentDashboardProfile = () => {
           </button>
         </div>
       </div>
-
-      <span className="mt-4 text-gray-600">Total Classes</span>
-      <span className="mt-1 text-3xl font-semibold text-gray-600">0</span>
-      <span className="mt-4 text-gray-600">Total Students Taught</span>
-      <span className="mt-1 text-3xl font-semibold text-gray-600">0</span>
+      <span className="mt-4 text-gray-600">Total Classes Attended</span>
+      <span className="mt-1 text-3xl font-semibold text-gray-600">{classesAttended==null?0:classesAttended.length}</span>
+      <span className="mt-4 text-gray-600">Total Exams Attempted</span>
+      <span className="mt-1 text-3xl font-semibold text-gray-600">{examsAttended==null?0:examsAttended.length}</span>
       <span
         className="mt-8 flex items-center py-4 px-3 text-white rounded-lg
 			bg-green-400 shadow focus:outline-none justify-center "
@@ -66,7 +66,7 @@ const StudentDashboardProfile = () => {
       </span>
 
       <div className="mt-12 flex items-center">
-        <span className="text-black">Top Ratings</span>
+        <span className="text-black">Top Scores</span>
         <button className="ml-2 focus:outline-none">
           <svg className="h-5 w-5 fill-black" viewBox="0 0 256 512">
             <path
