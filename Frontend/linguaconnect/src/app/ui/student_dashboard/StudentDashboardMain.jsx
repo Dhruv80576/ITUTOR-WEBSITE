@@ -33,6 +33,11 @@ const StudentDashboardMain = (props) => {
   const handleSearchClick = (event) => {
     getdata(searchName, pricing, experience, language, setUsers);
   };
+
+  const handleMentorConnection = (event) =>{
+    addMentors();
+  }
+
   const getdata = async (
     searchName,
     pricing,
@@ -52,6 +57,10 @@ const StudentDashboardMain = (props) => {
       setUsers(response.data.data);
     }
   };
+
+  const addMentors = async () => {
+    
+  }
   return (
     <main
       className="my-1 pt-2 pb-2 px-10 flex-1 bg-blue-400 dark:bg-black rounded-l-lg
@@ -62,7 +71,7 @@ const StudentDashboardMain = (props) => {
       </div>
       <div className="flex">
         <div
-          className="mr-6 w-full mt-8 box-content py-2 flex-shrink-0 flex flex-col bg-black
+          className="mr-6 w-full mt-8 box-content py-2 flex-shrink-0 flex flex-col bg-blue-500
 				dark:bg-gray-600 rounded-lg"
         >
           <div>
@@ -84,7 +93,7 @@ const StudentDashboardMain = (props) => {
               </button>
             </h3>
           </div>
-          <div className="w-[90%] flex-wrap md:flex-nowrap gap-14 mx-auto mt-4 border-2 border-red-500">
+          <div className="w-[90%] flex-wrap md:flex-nowrap gap-14 mx-auto mt-4">
             <div className="flex mt-4 gap-4">
               <h1 className="text-center">Filters</h1>
               <Input
@@ -106,7 +115,7 @@ const StudentDashboardMain = (props) => {
                 onChange={(e) => setPricing(e.target.value)}
               />
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mt-4">
               <Input
                 type="text"
                 label="Search"
@@ -135,9 +144,6 @@ const StudentDashboardMain = (props) => {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <div className="userList">
-              <h1>All content will be shown up here</h1>
-            </div>
           </div>
           <div className="flex flex-col items-center mt-12">
             <img
@@ -147,7 +153,7 @@ const StudentDashboardMain = (props) => {
               alt=" empty schedule"
             />
             <span className="font-bold mt-8">Start Learning!</span>
-            <span className="text-purple-500">Make your first appointment</span>
+            <span className="text-white">Make your first appointment</span>
             <Modal
               backdrop="blur"
               isOpen={isOpen}
@@ -157,7 +163,7 @@ const StudentDashboardMain = (props) => {
                 {(onClose) => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">
-                      <p className="text-black">Schedule time slots</p>
+                      <p className="text-black">Details of the teacher</p>
                     </ModalHeader>
                     <ModalBody>
                       <TeacherDashboardModalSidebar {...teacher} />                    
@@ -169,7 +175,8 @@ const StudentDashboardMain = (props) => {
                       <Button
                         color="primary"
                         onPress={() => {
-                          console.log(date, time, duration);
+                          // console.log(date, time, duration);
+                          handleMentorConnection(teacher._id);
                           onClose();
                         }}
                       >

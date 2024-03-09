@@ -8,6 +8,10 @@ const studentSchema = new mongoose.Schema({
     profilePic: {type: String},
     gender: {type: String, required: true, enum: ["male", "female"]},
     permissionType: {type: String, required: true, enum: ["Student", "Teacher"]},
+    mentorsConnected: [{
+        mentorId: {type: mongoose.Schema.Types.ObjectId, required:true },
+        date: {type: Date, createdAt: Date.now()}
+    }],
     classesAttended: [{
         mentor: {type: mongoose.Schema.Types.ObjectId, required:true },
         date: {type: Date, required: true}
