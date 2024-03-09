@@ -1,4 +1,16 @@
-export const StudentDashboardSidebar = () => {
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure
+} from "@nextui-org/react";
+export const StudentDashboardSidebar = (props) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {mentorsConnected} = props.student;
+  console.log(mentorsConnected);
   return (
     <div>
       <nav className="w-24 flex flex-col items-center bg-white dark:bg-gray-800 py-4">
@@ -63,6 +75,63 @@ export const StudentDashboardSidebar = () => {
             <span className="text-xs mt-2">Learnings</span>
           </a>
         </li>
+
+        <li
+          className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
+    rounded-lg"
+        >
+          <button
+            onClick={() => {
+              onOpen();
+            }}
+          >
+            <svg className="fill-current h-5 w-5" viewBox="0 0 24 24">
+                <path
+                  d="M21 18v1a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0
+                  012-2h14a2 2 0 012 2v1h-9a2 2 0 00-2 2v8a2 2 0 002
+                  2m0-2h10V8H12m4 5.5a1.5 1.5 0 01-1.5-1.5 1.5 1.5 0
+                  011.5-1.5 1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5z"
+                ></path>
+              </svg>
+              <span className="text-xs mt-2">Mentors</span>
+          </button>
+        </li>
+
+        <Modal
+              backdrop="blur"
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      <p className="text-black">All the teachers you have previously connected</p>
+                    </ModalHeader>
+                    <ModalBody>
+                      {mentorsConnected.map((mentor)=>{
+                        <h1>{mentor.mentorId}</h1>
+                        // <p>{mentor.date}</p>
+                      })}
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="light" onPress={onClose}>
+                        Close
+                      </Button>
+                      <Button
+                        color="primary"
+                        onPress={() => {
+                          console.log(date, time, duration);
+                          onClose();
+                        }}
+                      >
+                        Save
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
 
         <li
           className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
