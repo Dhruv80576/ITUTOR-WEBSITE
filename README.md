@@ -14,7 +14,7 @@ To get started with the Hackathon Name, follow these steps:
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/hackathon-name.git
+git clone 'repo url'
 ```
 #### 2. Install the dependencies
 ```bash
